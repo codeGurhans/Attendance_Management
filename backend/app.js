@@ -41,6 +41,9 @@ const pool = mysql.createPool({
     maxIdle: 20,
     idleTimeout: 30000, 
     queueLimit: 100,
+    ssl: {
+    rejectUnauthorized: true
+  }
   });
 
 const db = pool.promise(); 
