@@ -61,7 +61,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container">
-      <h2 className="login-title">Presence Tracker</h2>
+      <h2 className="login-title">PRESENCE TRACKER</h2>
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
