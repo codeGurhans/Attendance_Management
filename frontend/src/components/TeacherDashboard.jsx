@@ -51,7 +51,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
   const fetchClasses = async () => {
     try {
       // Use port 8081
-      const response = await axios.get('http://localhost:8081/api/teacher/classes');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/classes`);
       
       // Apply name corrections
       const correctedClasses = response.data.map(cls => {
@@ -71,7 +71,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
   const fetchSubjects = async () => {
     try {
       // Use port 8081
-      const response = await axios.get('http://localhost:8081/api/teacher/subjects');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/subjects`);
       
       // Apply name corrections
       const correctedSubjects = response.data.map(subj => {
@@ -92,7 +92,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
     setLoading(true);
     try {
       // Update port to 8081
-      const response = await axios.get(`http://localhost:8081/api/teacher/class/${classId}/students`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/class/${classId}/students`);
       
       // Add 'present' property to each student (default: true)
       const studentsWithAttendance = response.data.students.map(student => ({
@@ -138,7 +138,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
     
     try {
       // Update port to 8081
-      const response = await axios.post('http://localhost:8081/api/teacher/attendance/mark', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/attendance/mark`, {
         classId: selectedClass,
         subjectId: selectedSubject,
         date: selectedDate,
@@ -182,7 +182,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
     
     try {
       // This endpoint needs to be implemented in your backend
-      const response = await axios.get(`http://localhost:8081/api/teacher/attendance/view`, {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/attendance/view`, {
         params: {
           classId: selectedViewClass,
           subjectId: selectedViewSubject,
@@ -225,7 +225,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
         setLoading(true);
         
         // Fetch classes
-        const classesResponse = await axios.get(`http://localhost:8081/api/teacher/classes`);
+        const classesResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/classes`);
         
         // Preserve class names
         const updatedClasses = classesResponse.data.map(cls => ({
@@ -236,7 +236,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
         setClasses(updatedClasses);
         
         // Fetch subjects
-        const subjectsResponse = await axios.get(`http://localhost:8081/api/teacher/subjects`);
+        const subjectsResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/subjects`);
         
         // Preserve subject names
         const updatedSubjects = subjectsResponse.data.map(subj => ({
@@ -273,7 +273,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
     const timestamp = new Date().getTime();
     
     // Fetch classes
-    axios.get(`http://localhost:8081/api/teacher/classes?t=${timestamp}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/classes?t=${timestamp}`)
       .then(response => {
         console.log('Refreshed classes:', response.data);
         setClasses(response.data);
@@ -283,7 +283,7 @@ const TeacherDashboard = ({ user, onLogout }) => {
       });
     
     // Fetch subjects
-    axios.get(`http://localhost:8081/api/teacher/subjects?t=${timestamp}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/teacher/subjects?t=${timestamp}`)
       .then(response => {
         console.log('Refreshed subjects:', response.data);
         setSubjects(response.data);

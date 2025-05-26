@@ -29,7 +29,7 @@ const teacherRoutes = require('./routes/teacherRoutes');
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.BACKEND_PORT || 8081;
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,

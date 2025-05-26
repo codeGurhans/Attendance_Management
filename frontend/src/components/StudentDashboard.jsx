@@ -14,7 +14,7 @@ const StudentDashboard = ({ user, onLogout }) => {
     const fetchSubjects = async () => {
       try {
         // Use port 8081
-        const response = await axios.get('http://localhost:8081/api/student/subjects');
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student/subjects`);
         
         // Apply name corrections
         const correctedSubjects = response.data.map(subj => {
@@ -32,7 +32,7 @@ const StudentDashboard = ({ user, onLogout }) => {
 
     const fetchAttendanceSummary = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/api/student/attendance/summary/${user.id}?t=${new Date().getTime()}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student/attendance/summary/${user.id}?t=${new Date().getTime()}`);
         console.log('Raw summary data:', response.data);
         
         // Apply name corrections
@@ -72,7 +72,7 @@ const StudentDashboard = ({ user, onLogout }) => {
     
     try {
       const response = await axios.get(
-        `http://localhost:8081/api/student/attendance/${user.id}/subject/${selectedSubject}?t=${new Date().getTime()}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/student/attendance/${user.id}/subject/${selectedSubject}?t=${new Date().getTime()}`
       );
       
       // Apply name correction to the response
@@ -112,7 +112,7 @@ const StudentDashboard = ({ user, onLogout }) => {
     const timestamp = new Date().getTime();
     
     // Fetch subjects
-    axios.get(`http://localhost:8081/api/student/subjects?t=${timestamp}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student/subjects?t=${timestamp}`)
       .then(response => {
         setSubjects(response.data);
       })
@@ -121,7 +121,7 @@ const StudentDashboard = ({ user, onLogout }) => {
       });
     
     // Fetch attendance summary
-    axios.get(`http://localhost:8081/api/student/attendance/summary/${user.id}?t=${timestamp}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student/attendance/summary/${user.id}?t=${timestamp}`)
       .then(response => {
         setSummary(response.data);
       })

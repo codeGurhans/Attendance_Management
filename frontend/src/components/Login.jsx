@@ -18,9 +18,11 @@ const Login = ({ onLogin }) => {
     
     setIsLoading(true);
     setError('');
+
+    console.log('Backend URL from .env:', import.meta.env.VITE_BACKEND_URL);
     
     try {
-      const response = await axios.post('http://localhost:8081/api/auth/login', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         username,
         password
       }, {
